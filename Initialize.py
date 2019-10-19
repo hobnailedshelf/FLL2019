@@ -29,7 +29,6 @@ def init_robot():
     global Med_Motor_2
     global Right_Color_Sensor
     global Left_Color_Sensor
-    global Back_Color_Sensor
     global Gyro
     global Touch_Sensor
     global Robot

@@ -6,6 +6,8 @@
 		}
 	],
 	"settings": {
-		"debug.openDebug": "neverOpen"
+		"debug.openDebug": "neverOpen",
+		"python.linting.enabled": false
+
 	}
 }
