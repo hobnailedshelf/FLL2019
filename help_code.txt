@@ -1,4 +1,5 @@
 Helpful code snippets
+This file is where we store our random stuff
 
 1  - Turn Right until robot reaches blackline
     while Light_Reflection > 5:

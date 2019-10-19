@@ -14,6 +14,6 @@ logging.info("Beginning of the Runs.")
 
 #uncomment one of the functions below to run your missions
 #Go_To_Crane()
-#Go_To_Tree()
-Go_To_Swing()
+Go_To_Tree()
+#Go_To_Swing()
 #lift_traffic()
