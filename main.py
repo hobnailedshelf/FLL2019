@@ -8,8 +8,7 @@ from Run_Two import *
 from Run_Three import *
 from Run_Four import *
 import logging # this is used for logging
-
-
+#joe is here Dont mind me
 logging.info("Beginning of the Runs.")
 
 #uncomment one of the functions below to run your missions
