@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "FLL2019",
+			"path": "."
+		}
+	],
+	"settings": {
+		"debug.openDebug": "neverOpen"
+	}
+}
