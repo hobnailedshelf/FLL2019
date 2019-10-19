@@ -1,29 +1,19 @@
 #!/usr/bin/env pybricks-micropython
+from Initialize import *
+init_robot() # We initialize the robot here. All the sensors, motors, brick, etc.
 
-from pybricks import ev3brick as brick
-from pybricks.ev3devices import Motor, UltrasonicSensor, TouchSensor, ColorSensor
-from pybricks.parameters import Port
-from pybricks.tools import wait
-from pybricks.robotics import DriveBase
+from Common_Functions import *
+from Run_One import *
+from Run_Two import *
+from Run_Three import *
+from Run_Four import *
+import logging # this is used for logging
 
-# Play a sound.
-brick.sound.beep()
 
-# Initialize two motors and a drive base
-left = Motor(Port.C)
-right = Motor(Port.D)
-robot = DriveBase(left, right, 28, 121.6)
+logging.info("Beginning of the Runs.")
 
-#right.run_time(100,100000)
-Color = ColorSensor(Port.S3)
-touch = TouchSensor(Port.S2)
-robot.drive(-1000,0)
-#print(touch.pressed())
-while not touch.pressed():
-    wait(1)
-robot.stop(0)
-
-robot.drive(1000,0)
-while Color.color() != Color.BROWN:
-    wait(1)
-robot.stop(0)
+#uncomment one of the functions below to run your missions
+#Go_To_Crane()
+#Go_To_Tree()
+Go_To_Swing()
+#lift_traffic()

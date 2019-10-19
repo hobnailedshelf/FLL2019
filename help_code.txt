@@ -1,0 +1,59 @@
+Helpful code snippets
+
+1  - Turn Right until robot reaches blackline
+    while Light_Reflection > 5:
+        #turn right
+        Robot.drive(100,45)
+        logging.info ("checking... inside the loop")
+        Light_Reflection = Left_Color_Sensor.reflection()
+
+def temp():
+    rmotor_angle = 0
+    Right_Motor.reset_angle(0)
+    Left_Motor.reset_angle(0)
+    Right_Motor.run_angle(-200,360)
+    Robot.drive_time(100,0,300)
+    Robot.drive_time(-100,0,300)
+    Left_Motor.run_angle(-200,360)
+    #Robot.drive_time(200,0,1000)
+    Robot.drive_time(350,0,10000)
+
+    #while Right_Color_Sensor.reflection() > 35:
+     #   Right_Motor.run(-200)
+    #while Right_Color_Sensor.reflection() < 50:
+    #    Right_Motor.run(-200)
+    #rmotor_angle  = abs(Right_Motor.angle())
+    #left_Motor.run_angle(100,rmotor_angle)
+
+#def Go_To_Tree():
+    #line_follower(550,200,-1,"r",1)#testing
+    #line_follower(200,30,-1,"r",1)#testing
+
+    #line_follower(720,30,-1,"r",1)#testing  
+
+    #line_follower(1000,70,-1,"r",1)#testing
+
+    #line_follower(850,70,-1,"r",1)#testing
+
+    #line_follower(50,30,-1,"r",-1)#testing
+
+def Go_To_Bridge():
+    logging.info("Mission x - Going to Swing.")
+    
+    #Go to the turn at full speed
+    line_follower(2000,-1,"r",1,"d",2450,"X","X")
+
+    #follow line slowly till the left sensor hits white
+    line_follower(50,-1,"r",1,"l",50,"l","w")
+    
+    # turn
+    Right_Motor.run_angle(200,900)
+    
+    line_follower (150,-1,"l",1,"d",200,"X","X")
+    line_follower (350,-1,"l",1,"d",720,"X","X")
+    line_follower (50,-1,"l",1,"l",10,"r","b")
+
+    Target_Reflection = 35
+    Right_Motor.run_angle(-50,50)
+    Robot.drive_time(-100,0,1000)
+    Robot.drive_time(200,0,2000)go straight until left sensor senses white line when left sensor senses white line go right
