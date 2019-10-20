@@ -28,11 +28,9 @@ def Go_To_Crane():
     wait(500)
     #Coming Back
     go_straight(2000,1,"r",-1,"d",1440,"l","w")
-    Left_Motor.run_angle (200,340)
-    go_straight(2000,1,"r",-1,"d",1500,"l","w")
-    Med_Motor_2.run_time(-100,1500)
-    Left_Motor.run_angle (-200,360)
-
+    Left_Motor.run_angle (800,720)
+    go_straight(2000,1,"r",-1,"d",2700,"l","w")
+    Left_Motor.run_angle (-800,720)
 
 
 def Go_To_Crane_1():

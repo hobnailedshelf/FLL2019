@@ -30,7 +30,7 @@ def Go_To_Swing():
     Left_Motor.run_angle(100,130)
     run = False
     Med_Motor_2.run_time(100,2000)
-    go_straight(150,-1,"r",1,"d",800,"l","w")
+    go_straight(150,-1,"r",1,"d",900,"l","w")
     Left_Motor.run_angle(50,100)
     go_straight(50,1,"r",-1,"d",400,"l","w")
     go_straight(2000,1,"r",-1,"d",4500,"l","w")
