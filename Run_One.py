@@ -15,47 +15,22 @@ import logging # this is used for logging
 #What_ColReflect - w - white, b - black
 
 def Go_To_Crane():
-    Left_Motor.run_angle (200,370)
+    Left_Motor.run_angle (300,370)
     go_straight(100,-1,"r",1,"d",800,"l","w")
-    Right_Motor.run_angle (200,390)
+    Right_Motor.run_angle (300,390)
     go_straight(2000,-1,"r",1,"d",1400,"l","w")
     go_straight(80,-1,"r",1,"d",300,"l","w")
     wait(2000)
     Med_Motor_2.run_time(90,1400)
     Med_Motor_2.run_time(-90,1200)
-    wait(3000)
-    Med_Motor_2.run_time(100,1500)
-    wait(500)
-    #Coming Back
-    go_straight(2000,1,"r",-1,"d",1440,"l","w")
-    Left_Motor.run_angle (800,720)
-    go_straight(2000,1,"r",-1,"d",2700,"l","w")
-    Left_Motor.run_angle (-800,720)
-
-
-def Go_To_Crane_1():
-    logging.info("Mission 1 - Going to Crane.")
-    #go_straight_distance(0,0,0,0)
-    #Med_Motor_2.run_time(-100,500)
-    #Med_Motor_2.run_time(100,200)
-    go_straight(2000,-1,"r",1,"d",2300,"l","w")
-    go_straight(2000,-1,"r",1,"d",380,"l","w")
-    wait(1000)
-    go_straight(40,-1,"r",1,"d",100,"l","w")
-    go_straight(40,1,"r",-1,"d",80,"l","w")
-    Med_Motor_2.run_time(100,1200)
-    Med_Motor_2.run_time(-100,1200)
     wait(2000)
     Med_Motor_2.run_time(100,1500)
     wait(500)
-    go_straight(2000,1,"r",-1,"d",2450,"l","w")
-
-
-
-    logging.info("Mission 1 - Reached Crane")
-    #Do Something here
-    logging.info("Mission 1 - Pushed Blue Block")
-
-
-
-
+    #Coming Back
+    go_straight(2000,1,"r",-1,"d",720,"l","w")
+    Right_Motor.run_angle (400,500)
+    go_straight(2000,-1,"r",1,"d",800,"l","w")
+    Right_Motor.run_angle (-300,650)
+    #Right_Motor.run_angle (1000,200)
+    Robot.drive_time(-800, 0, 2000)
+    #Right_Motor.run_angle (1000000000,200)
