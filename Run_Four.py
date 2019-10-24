@@ -17,23 +17,32 @@ def Go_To_Swing():
     #follow line slowly till the left sensor hits white
     line_follower(50,-1,"r",1,"l",50,"l","w")
 
-    Right_Motor.run_angle(100,450)
-    Left_Motor.run_angle(100,50)
-    Right_Motor.run_angle(-100,20)
-    Left_Motor.run_angle(100,40)
-    Right_Motor.run_angle(-100,40)
-    Right_Motor.run_angle(-100,15)
 
-    go_straight(500,-1,"r",1,"d",840,"l","w")
+    Right_Motor.run_angle(1000,360)
     
+    d = 0 
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0)
+
+    while d < 1000:
+        Robot.drive(1000,0)
+        l = abs(Left_Motor.angle())
+        r = abs(Right_Motor.angle())
+        d = (l+r)/2
+    logging.info("done going straight")
+    
+    #go_straight(1000,-1,"r",1,"d",1000,"l","w")
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0)
     Right_Motor.run_angle(-100,35)
-    Left_Motor.run_angle(100,130)
     run = False
     Med_Motor_2.run_time(100,2000)
-    go_straight(150,-1,"r",1,"d",900,"l","w")
+    Robot.drive_time(300,0,2000)
+    #go_straight(250,-1,"r",1,"d",1200,"l","w")
     Left_Motor.run_angle(50,100)
     go_straight(50,1,"r",-1,"d",400,"l","w")
     go_straight(2000,1,"r",-1,"d",4500,"l","w")
+    #multithread for medium motor to go down so it does not hit the tree
 
 
 
