@@ -10,13 +10,15 @@ from Run_Four import *
 import logging # this is used for logging
 #joe is here Dont mind me
 logging.info("Beginning of the Runs.")
+battery = str(brick.battery.voltage())
+logging.info(battery)
 
 #uncomment one of the functions below to run your missions
 #Go_To_Crane()
 #Go_To_Tree()
 Go_To_Swing()
 #lift_traffic()
-
+#drop_blocks()
 def control_runs():
     #Code to manage runs with buttons
     brick.display.clear()

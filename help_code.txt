@@ -1,3 +1,5 @@
+ln -s /home/robot/FLL2019/main.py  _RUN
+
 Helpful code snippets
 This file is where we store our random stuff
 

@@ -159,7 +159,6 @@ def go_straight (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Tar
     Robot.stop(0)
 
 
-def line_follower_back (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Target_Condition,Condition_Sensor, What_ColReflect):
     #m_speed - Maximum Speed
     #Direction - Direction that therobot has to turn for correction -1 or +1
     #WhichSensor - Sensor that follows the line l for leftsensor and r for rightsensor and b for backsensor
