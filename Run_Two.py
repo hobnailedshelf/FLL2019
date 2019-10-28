@@ -11,7 +11,7 @@ def Go_To_Tree():
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
 
-    while d < 1500:
+    while d < 980:
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
@@ -21,10 +21,10 @@ def Go_To_Tree():
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
 
-    Left_Motor.run_angle(900,95)
+    Left_Motor.run_angle(900, 200)
     #go_straight(2000,1,"l",-1,"d",3200,"l","b")
 
-    while d < 3000:
+    while d < 2500:
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
