@@ -13,12 +13,7 @@ logging.info("Beginning of the Runs.")
 battery = str(brick.battery.voltage())
 logging.info(battery)
 
-#uncomment one of the functions below to run your missions
-#Go_To_Crane()
-#Go_To_Tree()
-Go_To_Swing()
-#lift_traffic()
-#drop_blocks()
+
 def control_runs():
     #Code to manage runs with buttons
     brick.display.clear()
@@ -26,12 +21,25 @@ def control_runs():
     voltage = str(brick.battery.voltage())
     brick.display.text("Voltage = " + voltage)
     brick.light(Color.ORANGE)
-    pressed = str(brick.buttons())
-
-    logging.info(pressed)
     while True:
-        if str(brick.buttons())=="16":
+        if Button.UP in brick.buttons():
             brick.display.clear()
-            brick.display.text("Run 4", (60, 50))
-        pressed = str(brick.buttons())
-        logging.info(pressed)
+            brick.display.text("UP Button - CRANE", (60, 50))
+            Go_To_Crane()
+        elif Button.RIGHT in brick.buttons():
+            brick.display.clear()
+            brick.display.text("RIGHT Button - TREE", (60, 50))
+            Go_To_Tree()   
+        elif Button.DOWN in brick.buttons():
+            brick.display.clear()
+            brick.display.text("DOWN Button - TRAFFIC", (60, 50))
+            lift_traffic()
+        elif Button.LEFT in brick.buttons():
+            brick.display.clear()
+            brick.display.text("LEFT+ Button - SWING/SAFETY", (60, 50))
+            Go_To_Swing()
+        
+
+
+
+control_runs()
