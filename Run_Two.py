@@ -6,25 +6,44 @@ import logging # this is used for logging
 def Go_To_Tree():
     logging.info("Starting of the tree mission.")
     #go_straight(2000,1,"l",-1,"d",800,"l","b")
+    go_straight(150,1,"l",-1,"l",40,"r","b")
+    Robot.stop(0)
+
+    logging.info("here")
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0) 
+    Right_Motor.run_angle(-200, 580)
+
 
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-
-    while d < 980:
+    while d < 1400:
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
+        logging.info(str(d))
+    Robot.stop(0)
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0)
+    logging.info("out of the loop")
+    wait(600)
+    Med_Motor_1.run_time(75,1000)
+    Med_Motor_1.run_time(-1000,400)
+    Robot.drive_time(1000, 0, 6000)
+    Med_Motor_1.run_time(-1000,500)
+    wait(4555)
 
+
+    """Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0) 
+    #Right_Motor.run_angle(-200, 310)
+    #go_straight(2000,1,"l",-1,"d",3200,"l","b")
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-
-    Left_Motor.run_angle(900, 200)
-    #go_straight(2000,1,"l",-1,"d",3200,"l","b")
-
-    while d < 2500:
+    while d < 2750:
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
@@ -35,8 +54,8 @@ def Go_To_Tree():
     Right_Motor.reset_angle(0)
 
     wait(600)
-    Med_Motor_1.run_time(110,1000)
-    Med_Motor_1.run_time(-1000,1000)
+    Med_Motor_1.run_time(100,750)
+    Med_Motor_1.run_time(-1000,400)
     Robot.drive_time(1000, 0, 6000)
     wait(4555)
     #go_straight(2000,-1,"l",-1,"d",2200,"l","b")
@@ -52,4 +71,4 @@ def Go_To_Tree():
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
-        d = (l+r)/2
+        d = (l+r)/2""" 
