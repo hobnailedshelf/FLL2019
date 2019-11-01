@@ -14,22 +14,20 @@ def drop_blocks():
 
 def Go_To_Swing():
     logging.info("Mission x - Going to Swing.")
+    
     #define and set run variable for the thread control
     global run
     run = True
     t = Thread(target=lift_medium_motor)
+    
     #Start the thread so that the attachment can go up and stay there    
     t.start()
     #lift the back motor up
-    Med_Motor_1.run_time(-200,750)
     #star thread to keep the back motor up
     global run_back
-    run_back = True
-    t_back = Thread(target=lift_back_motor)
-    t_back.start()
 
     #turn North towards the black line
-    Right_Motor.run_angle(200,270)
+    Right_Motor.run_angle(500,270)
     #go to black line
     Condition_Reflection = Right_Color_Sensor.reflection()
     while Condition_Reflection > 20:
@@ -40,12 +38,16 @@ def Go_To_Swing():
         Condition_Reflection = Right_Color_Sensor.reflection()
 
     #Go to the turn at full speed-
-    line_follower(2000,-1,"r",1,"d",2300,"X","X")
-
+    line_follower(2000,-1,"r",1,"d",1950,"X","X")
+    run_back = True
+    t_back = Thread(target=lift_back_motor)
+    Med_Motor_1.run_time(-200,650)
+    t_back.start()
+    line_follower(2000,-1,"r",1,"d",440,"X","X")
     #follow line slowly till the left sensor hits white
     line_follower(50,-1,"r",1,"l",60,"l","w")
 
-    #turn North
+    #turn *North*
     Right_Motor.run_angle(1000,360)
     
     #reset the motors and set d variable so that we can travel using robot.drive this is faster than the common function
@@ -79,14 +81,16 @@ def Go_To_Swing():
     run = False
     
     #pull back for 300 degrees so that the attachment comes loose
-    go_straight(50,1,"r",-1,"d",300,"l","w")
+    go_straight(500,1,"r",-1,"d",300,"l","w")
+
+
     
     #set the run variable as true so that we can lift the motor and the partial attachment up
     run = True
     #start the thread so that the attachment can go up
     t.start()
     #Turn towards the swing
-    Right_Motor.run_angle(-1000,100)
+    Right_Motor.run_angle(-1000,450)
 
     #reset the motors and the d variable
     d = 0 
@@ -105,33 +109,23 @@ def Go_To_Swing():
     Right_Motor.reset_angle(0)
     
     #travel back towards elevator
-    while d < 1000:
-        Robot.drive(-1000,0)
+    while d < 1900:
+        Robot.drive(-500,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
-    #reset the motors and the d varible
-    d = 0 
+    Robot.stop()
+    wait(150)
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-    #go to the black like - work in progress
-    #**** CURRENTLY DOESN'T GO TO THE white LINE - TEST MORE
-    go_straight(200,1,"l",-1,"l",50,"r","w")
-    go_straight(200,-1,"l",1,"l",35,"l","b")
-    go_straight(200,-1,"l",1,"l",50,"l","w")
-
-    while d < 150:
-        Robot.drive(-1000,0)
-        l = abs(Left_Motor.angle())
-        r = abs(Right_Motor.angle())
-        d = (l+r)/2
-     #reset the motors and the d varible
-    d = 0 
-    Left_Motor.reset_angle(0)
-    Right_Motor.reset_angle(0)       
+    logging.info(str(Left_Motor.angle()))
+    Left_Motor.run_angle(-400,200)
+    logging.info(str(Left_Motor.angle()))
+   
     run_back = False
     Med_Motor_1.run_time(80,2500)
-    #Left_Motor.run_angle(1000,360)
+    Left_Motor.run_angle(500,750)
+    Med_Motor_1.run_angle(-200,180)
 
 
 def lift_medium_motor():
@@ -143,7 +137,7 @@ def lift_medium_motor():
 def lift_back_motor():
     global run_back
     while run_back:
-        Med_Motor_1.run(-10)
+        Med_Motor_1.run(-2)
     logging.info("Thread stopped.")
 
 def down_medium_motor():
