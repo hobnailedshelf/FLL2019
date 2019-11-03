@@ -29,57 +29,75 @@ def Go_To_Tree():
     Right_Motor.reset_angle(0)
     logging.info("out of the loop")
     wait(600)
-    Med_Motor_1.run_time(75,1000)
+    Med_Motor_1.run_time(75,100)
     Med_Motor_1.run_time(-1000,400)
     Robot.drive_time(1000, 0, 4000)
     Med_Motor_1.run_time(-1000,500)
-    wait(4500)
+
+
+
+def move_stack():
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-    while d < 1800:
-        Robot.drive(300,0)
+    while d < 1700:
+        Robot.drive(400,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
         logging.info(str(d))
     Robot.stop(0)   
-    Robot.drive_time(-1000, 0, 3000)
+    Robot.drive_time(-1000, 0, 4000)
 
 
-    """Left_Motor.reset_angle(0)
-    Right_Motor.reset_angle(0) 
-    #Right_Motor.run_angle(-200, 310)
-    #go_straight(2000,1,"l",-1,"d",3200,"l","b")
+def Go_To_Tree_2():
+    logging.info("Starting of the tree mission to smalll branch.")
+    # Go to the Black line
+    go_straight(150,1,"l",-1,"l",35,"l","b")
+    Robot.stop(0)
+
+    #Moving it back to fix angle a little bit ****NOT TESTED WELL****
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-    while d < 2750:
-        Robot.drive(-1000,0)
+    while d < 120:
+        Robot.drive(100,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
+        logging.info(str(d))
+    Robot.stop(0)
 
+
+    logging.info("here")
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0) 
+    #Turn to face the tree
+    Right_Motor.run_angle(-200, 475)
+    Med_Motor_1.run_time(120,550)
+
+    #Move forward to the tree
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-
-    wait(600)
-    Med_Motor_1.run_time(100,750)
-    Med_Motor_1.run_time(-1000,400)
-    Robot.drive_time(1000, 0, 6000)
-    wait(4555)
-    #go_straight(2000,-1,"l",-1,"d",2200,"l","b")
-    #go_straight(2000,1,"l",-1,"d",1700,"l","b")
-
-    Robot.drive_time(1000, 0, 2500)
-
-    d = 0 
-    Left_Motor.reset_angle(0)
-    Right_Motor.reset_angle(0)
-
-    while d < 900:
-        Robot.drive(-1000,0)
+    while d < 1700:
+        #move slowly first so that the bat doesn't fall off
+        if d < 201:
+            Robot.drive(-200,0)
+        else:
+            Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
-        d = (l+r)/2""" 
+        d = (l+r)/2
+        logging.info(str(d))
+    Robot.stop(0)
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0)
+    logging.info("out of the loop")
+    wait(600)
+    #Move the blue block down
+    Med_Motor_1.run_time(75,1000)
+    #lift the art to move 
+    Med_Motor_1.run_time(-100,400)
+    Robot.drive_time(1000, 0, 4000)
+    Med_Motor_1.run_time(-1000,500)

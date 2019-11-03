@@ -41,9 +41,10 @@ def Go_To_Swing():
     line_follower(2000,-1,"r",1,"d",1950,"X","X")
     run_back = True
     t_back = Thread(target=lift_back_motor)
-    Med_Motor_1.run_time(-200,650)
+    Med_Motor_1.run_time(-200,760)
     t_back.start()
-    line_follower(2000,-1,"r",1,"d",400,"X","X")
+    wait(300)
+    line_follower(2000,-1,"r",1,"d",200,"X","X")
     #follow line slowly till the left sensor hits white
     line_follower(50,-1,"r",1,"l",60,"l","w")
 
@@ -126,7 +127,7 @@ def Go_To_Swing():
     Med_Motor_1.run_time(80,2500)
     Left_Motor.run_angle(1000,1000)
     Med_Motor_1.run_angle(-200,180)
-
+    Do_Elevator()
 
 
 def lift_medium_motor():
@@ -146,3 +147,30 @@ def down_medium_motor():
     while run:
         Med_Motor_2.run(50)
     logging.info("Thread stopped.")
+
+def Do_Elevator():
+    #reset the motors and the d varible
+    d = 0 
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0)
+    
+    #travel back towards elevator
+    while d < 1250:
+        Robot.drive(-1000,0)
+        l = abs(Left_Motor.angle())
+        r = abs(Right_Motor.angle())
+        d = (l+r)/2
+    Robot.stop()
+
+    #reset the motors and the d varible
+    d = 0 
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0)
+    
+    #travel back towards elevator
+    while d < 1250:
+        Robot.drive(1000,0)
+        l = abs(Left_Motor.angle())
+        r = abs(Right_Motor.angle())
+        d = (l+r)/2
+    Robot.stop()
