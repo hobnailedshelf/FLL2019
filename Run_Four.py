@@ -43,7 +43,7 @@ def Go_To_Swing():
     t_back = Thread(target=lift_back_motor)
     Med_Motor_1.run_time(-200,650)
     t_back.start()
-    line_follower(2000,-1,"r",1,"d",440,"X","X")
+    line_follower(2000,-1,"r",1,"d",400,"X","X")
     #follow line slowly till the left sensor hits white
     line_follower(50,-1,"r",1,"l",60,"l","w")
 
@@ -110,7 +110,7 @@ def Go_To_Swing():
     
     #travel back towards elevator
     while d < 1900:
-        Robot.drive(-500,0)
+        Robot.drive(-700,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
@@ -119,13 +119,14 @@ def Go_To_Swing():
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
     logging.info(str(Left_Motor.angle()))
-    Left_Motor.run_angle(-400,200)
+    Left_Motor.run_angle(-1000,200)
     logging.info(str(Left_Motor.angle()))
    
     run_back = False
     Med_Motor_1.run_time(80,2500)
-    Left_Motor.run_angle(500,750)
+    Left_Motor.run_angle(1000,1000)
     Med_Motor_1.run_angle(-200,180)
+
 
 
 def lift_medium_motor():
