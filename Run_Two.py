@@ -34,6 +34,14 @@ def Go_To_Tree():
     Robot.drive_time(1000, 0, 4000)
     Med_Motor_1.run_time(-1000,500)
 
+def Go_To_Tree2():
+    logging.info("Starting of the tree mission.")
+    #go_straight(2000,1,"l",-1,"d",800,"l","b")
+    go_straight(150,1,"l",-1,"l",35,"l","b")
+    Right_Motor.run_angle(-150,515)
+    go_straight(2000,1,"l",-1,"d",2000,"x","x")
+    Med_Motor_1.run_time(-75,100)
+    Med_Motor_1.run_time(100,400)
 
 
 def move_stack():

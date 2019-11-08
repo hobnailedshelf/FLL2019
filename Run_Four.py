@@ -25,7 +25,7 @@ def Go_To_Swing():
     #lift the back motor up
     #star thread to keep the back motor up
     global run_back
-
+  
     #turn North towards the black line
     Right_Motor.run_angle(500,270)
     #go to black line
@@ -92,25 +92,6 @@ def Go_To_Swing():
     t.start()
     #Turn towards the swing
     Right_Motor.run_angle(-1000,450)
-
-     d = 0 
-    Left_Motor.reset_angle(0)
-    Right_Motor.reset_angle(0)
-    while d < 100:
-        Robot.drive(-1000,0)
-        l = abs(Left_Motor.angle())
-        r = abs(Right_Motor.angle())
-        d = (l+r)/2
-        logging.info(str(d))
-    Robot.stop(0)
-    Left_Motor.reset_angle(0)
-    Right_Motor.reset_angle(0)
-
-    Right_Motor.run_angle(-1000,300)
-
-    Right_Motor.run_angle(1000,750)
-
-
     #reset the motors and the d variable
     d = 0 
     Left_Motor.reset_angle(0)
@@ -126,7 +107,10 @@ def Go_To_Swing():
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-    
+
+
+
+
     #travel back towards elevator
     while d < 1900:
         Robot.drive(-700,0)
@@ -149,7 +133,7 @@ def Go_To_Swing():
     #Start the thread so that the attachment can go up and stay there    
     t3.start()
     Do_Elevator()
-    Go_To_Bride()
+    Go_To_Bridge()
 
 def lift_medium_motor2():
     Med_Motor_1.run_angle(-200,180)
@@ -199,5 +183,23 @@ def Do_Elevator():
         d = (l+r)/2
     Robot.stop()
 
-def Go_To_Bride():
-    go_straight(150,-1,"l",1,"l",75,"l","w")
+def Go_To_Bridge():
+    Condition_Reflection = Left_Color_Sensor.reflection()
+    logging.info(str(Condition_Reflection))
+    while Condition_Reflection > 8:
+        Robot.drive(200,0)
+        Condition_Reflection =  Left_Color_Sensor.reflection()
+    while Condition_Reflection > 20:
+        Robot.drive(50,0)
+        Condition_Reflection =  Left_Color_Sensor.reflection()
+    Condition_Reflection =  Right_Color_Sensor.reflection()
+    while Condition_Reflection > 20:
+        Right_Motor.run(50)
+        Condition_Reflection =  Right_Color_Sensor.reflection()
+    Condition_Reflection =  Left_Color_Sensor.reflection()
+    while Condition_Reflection > 20:
+        Left_Motor.run(50)
+        Condition_Reflection =  Left_Color_Sensor.reflection()
+    Right_Motor.reset_angle(0)
+    Left_Motor.reset_angle(0)
+    Right_Motor.run_angle(100,270)

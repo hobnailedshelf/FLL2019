@@ -44,13 +44,6 @@ def control_runs():
             move_stack()
             
         
-def testmed():
-    i=1
-    while i < 10:
-        Med_Motor_2.run_angle(25,5)
-
-        i = i + 1
-
 
 control_runs()
-
+#Go_To_Tree2()
