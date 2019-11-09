@@ -116,7 +116,7 @@ def go_straight (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Tar
         r = abs(Right_Motor.angle())
 
         if speed < m_speed:    
-            speed = speed + 2
+            speed = speed + 5 #originally 2
         if WhichSensor == "l":
             Light_Reflection = Left_Color_Sensor.reflection()
         else:
@@ -145,7 +145,8 @@ def go_straight (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Tar
             Condition_Reflection = Right_Color_Sensor.reflection()
 
         if Condition == "d":
-
+            if Target_Condition - Current_Distance < 50:
+                speed = 30
             if Current_Distance >= Target_Condition:
                 flag = False
             logging.info(str(l)+" - "+str(r))

@@ -67,7 +67,7 @@ def init_robot():
     Max_Speed = 70
     Robot.stop(0)
 
-    brick.sound.file('boing_spring.wav')
+    brick.sound.file('/home/robot/FLL2019/boing_spring.wav')
 
     logging.info("Initializing complete.")
     logging.info("####################################")
