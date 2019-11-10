@@ -118,30 +118,37 @@ def Go_To_Swing():
 
 
 
-    #travel back towards elevator
+    #travel back towards beige circle
     while d < 1200:
-        Robot.drive(-700,0)
+        Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
     Robot.stop()
-    wait(3000)
+    wait(100)
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-    logging.info(str(Left_Motor.angle()))
-    Left_Motor.run_angle(1000,250)
-    logging.info(str(Left_Motor.angle()))
+
+    #Turn to center in the beige circle
+    Left_Motor.run_angle(1000,180)
    
+    #go north a bit to make sure beige block falls in the circle!
+    Robot.drive_time(-1000,0,500)
+
     run_back = False
-    Med_Motor_1.run_time(80,2500)
-    Left_Motor.run_angle(1000,-1000)
+    #drop the block
+    Med_Motor_1.run_time(100,2700)
+
+    Robot.drive_time(1000,0,500)
+
+    #Left_Motor.run_angle(1000,-1000)
     t3 = Thread(target=lift_medium_motor2)
     
 
     #Start the thread so that the attachment can go up and stay there    
     t3.start()
     Do_Elevator()
-    Go_To_Bridge()
+    #Go_To_Bridge()
 
 def lift_medium_motor2():
     Med_Motor_1.run_angle(-200,180)
@@ -168,6 +175,14 @@ def Do_Elevator():
     #reset the motors and the d varible
     d = 0 
     Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0) 
+
+    #turn about 90 degrees to face elevator
+    Left_Motor.run_angle(1000,450)
+
+    #reset the motors and the d varible
+    d = 0 
+    Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
     
     #travel back towards elevator
@@ -184,7 +199,7 @@ def Do_Elevator():
     Right_Motor.reset_angle(0)
     
     #travel back towards elevator
-    while d < 1100:
+    while d < 1355:
         Robot.drive(1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
