@@ -43,19 +43,20 @@ def Go_To_Swing():
     #Go to the red circle
     line_follower(2000,-1,"r",1,"d",1150,"X","X")
     #lift the back motor to release the red and the blue blocks
-    run_back = True
-    t_back = Thread(target=lift_back_motor)
-    Med_Motor_1.run_time(-200,650)
-    t_back.start()
+    run_back = True # This variable is for the thread
+    t_back = Thread(target=lift_back_motor) # set the thread so that when we lift the back motor it keep it up and doesn't fall down due to wait
+    Med_Motor_1.run_time(-200,650) #lift back motor up
+    t_back.start() # start the thread so that the back motor stays up
     #go forward to the turn
     line_follower(200,-1,"r",1,"d",100,"X","X")
-    #follow line slowly till the left sensor hits white
+    #follow line slowly till the left sensor hits white line. This is the intersection of the two lines on the board
     line_follower(40,-1,"r",1,"l",60,"l","w")
     #turn *North*
     Right_Motor.reset_angle(0)
     wait(3000)
     Right_Motor.run_target(1000,220)
-  
+    brick.sound.file('/home/robot/FLL2019/boing_spring.wav')
+
     #reset the motors and set d variable so that we can travel using robot.drive this is faster than the common function
     d = 0 
     Left_Motor.reset_angle(0)

@@ -49,15 +49,6 @@ def move_stack():
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
     go_straight(1000,-1,"l",1,"d",1500,"l","b")
-    """
-    while d < 1300:
-        Robot.drive(1000,-5)
-        l = abs(Left_Motor.angle())
-        r = abs(Right_Motor.angle())
-        d = (l+r)/2
-        logging.info(str(d))
-    Robot.stop(0) 
-    """ 
     Robot.drive_time(-1000, 800, 1000)
     Robot.drive_time(-1000, 0, 1700)
 
