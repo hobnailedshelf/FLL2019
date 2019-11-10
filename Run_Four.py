@@ -178,7 +178,8 @@ def Do_Elevator():
     Right_Motor.reset_angle(0) 
 
     #turn about 90 degrees to face elevator
-    Left_Motor.run_angle(1000,450)
+    Left_Motor.run_angle(1000,250)
+    Right_Motor.run_angle(1000,-250)
 
     #reset the motors and the d varible
     d = 0 
@@ -186,7 +187,7 @@ def Do_Elevator():
     Right_Motor.reset_angle(0)
     
     #travel back towards elevator
-    while d < 1300:
+    while d < 800:
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
@@ -199,14 +200,14 @@ def Do_Elevator():
     Right_Motor.reset_angle(0)
     
     #travel back towards elevator
-    while d < 1355:
+    while d < 855:
         Robot.drive(1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
     Robot.stop()
 
-def Go_To_Bridge():
+def Go_To_Bridge(): 
     Condition_Reflection = Left_Color_Sensor.reflection()
     logging.info(str(Condition_Reflection))
     while Condition_Reflection > 8:
