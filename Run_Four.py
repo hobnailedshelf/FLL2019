@@ -32,7 +32,7 @@ def Go_To_Swing():
     logging.info("completed run taret")
     #go to black line
     Condition_Reflection = Right_Color_Sensor.reflection()
-    while Condition_Reflection > 20:
+    while Condition_Reflection > 15:
         Robot.drive(200,0)
         Condition_Reflection = Right_Color_Sensor.reflection()
     #move forward to get to the half black and half white
@@ -41,29 +41,29 @@ def Go_To_Swing():
         Condition_Reflection = Right_Color_Sensor.reflection()
 
     #Go to the red circle
-    line_follower(2000,-1,"r",1,"d",1150,"X","X")
+    line_follower(2000,-1,"r",1,"d",1250,"X","X")
     #lift the back motor to release the red and the blue blocks
     run_back = True # This variable is for the thread
     t_back = Thread(target=lift_back_motor) # set the thread so that when we lift the back motor it keep it up and doesn't fall down due to wait
     Med_Motor_1.run_time(-200,650) #lift back motor up
     t_back.start() # start the thread so that the back motor stays up
     #go forward to the turn
+    wait(200)
     line_follower(200,-1,"r",1,"d",100,"X","X")
     #follow line slowly till the left sensor hits white line. This is the intersection of the two lines on the board
-    line_follower(40,-1,"r",1,"l",60,"l","w")
-    #turn *North*
+    go_straight(100,-1,"r",1,"l",50,"l","w")
+    #line_follower(40,-1,"r",1,"l",50,"l","w")
+    #turn towards *North*
     Right_Motor.reset_angle(0)
-    wait(3000)
-    Right_Motor.run_target(1000,220)
-    brick.sound.file('/home/robot/FLL2019/boing_spring.wav')
+    Right_Motor.run_target(1000,150)
 
     #reset the motors and set d variable so that we can travel using robot.drive this is faster than the common function
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
 
-    while d < 500:
-        Robot.drive(750,0)
+    while d < 600:
+        Robot.drive(1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
@@ -73,7 +73,7 @@ def Go_To_Swing():
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
     #**** THIS ANGLE IS FLAKY TEST MORE***********
-    Right_Motor.run_angle(-100,60)
+    Right_Motor.run_angle(-1000,80)
     #set the run variable as false so that the attachment can come down
     run = False
     #move the attachment down
@@ -82,14 +82,14 @@ def Go_To_Swing():
     t2 = Thread(target=down_medium_motor)
     t2.start
     #move forward for 2 seconds so that the robot goes and moves the blue stilts
-    Robot.drive_time(300,0,2000)
+    Robot.drive_time(1000,0,1500)
     #Run the left motor so that the attachment completely goes in
-    Left_Motor.run_angle(50,100)
+    #Left_Motor.run_angle(50,100)
     run = False
     
     #pull back for 300 degrees so that the attachment comes loose
     go_straight(500,1,"r",-1,"d",300,"l","w")
-
+    
 
     
     #set the run variable as true so that we can lift the motor and the partial attachment up
@@ -119,24 +119,25 @@ def Go_To_Swing():
 
 
     #travel back towards elevator
-    while d < 1900:
+    while d < 1200:
         Robot.drive(-700,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
     Robot.stop()
-    wait(150)
+    wait(3000)
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
     logging.info(str(Left_Motor.angle()))
-    Left_Motor.run_angle(-1000,200)
+    Left_Motor.run_angle(1000,250)
     logging.info(str(Left_Motor.angle()))
    
     run_back = False
     Med_Motor_1.run_time(80,2500)
-    Left_Motor.run_angle(1000,1000)
+    Left_Motor.run_angle(1000,-1000)
     t3 = Thread(target=lift_medium_motor2)
     
+
     #Start the thread so that the attachment can go up and stay there    
     t3.start()
     Do_Elevator()
@@ -170,7 +171,7 @@ def Do_Elevator():
     Right_Motor.reset_angle(0)
     
     #travel back towards elevator
-    while d < 1250:
+    while d < 1300:
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
