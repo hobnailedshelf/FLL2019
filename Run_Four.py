@@ -25,39 +25,44 @@ def Go_To_Swing():
     #lift the back motor up
     #star thread to keep the back motor up
     global run_back
+    Right_Motor.reset_angle(0)
   
     #turn North towards the black line
-    Right_Motor.run_angle(500,270)
+    Right_Motor.run_target(300,165)
+    logging.info("completed run taret")
     #go to black line
     Condition_Reflection = Right_Color_Sensor.reflection()
     while Condition_Reflection > 20:
         Robot.drive(200,0)
         Condition_Reflection = Right_Color_Sensor.reflection()
+    #move forward to get to the half black and half white
     while Condition_Reflection < 35:
         Robot.drive(50,0)
         Condition_Reflection = Right_Color_Sensor.reflection()
 
-    #Go to the turn at full speed-
-    line_follower(2000,-1,"r",1,"d",1950,"X","X")
+    #Go to the red circle
+    line_follower(2000,-1,"r",1,"d",1150,"X","X")
+    #lift the back motor to release the red and the blue blocks
     run_back = True
     t_back = Thread(target=lift_back_motor)
-    Med_Motor_1.run_time(-200,700)
+    Med_Motor_1.run_time(-200,650)
     t_back.start()
-    wait(300)
-    line_follower(2000,-1,"r",1,"d",200,"X","X")
+    #go forward to the turn
+    line_follower(200,-1,"r",1,"d",100,"X","X")
     #follow line slowly till the left sensor hits white
-    line_follower(50,-1,"r",1,"l",60,"l","w")
-
+    line_follower(40,-1,"r",1,"l",60,"l","w")
     #turn *North*
-    Right_Motor.run_angle(1000,360)
-    
+    Right_Motor.reset_angle(0)
+    wait(3000)
+    Right_Motor.run_target(1000,220)
+  
     #reset the motors and set d variable so that we can travel using robot.drive this is faster than the common function
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
 
-    while d < 1000:
-        Robot.drive(1000,0)
+    while d < 500:
+        Robot.drive(750,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
@@ -91,13 +96,14 @@ def Go_To_Swing():
     #start the thread so that the attachment can go up
     t.start()
     #Turn towards the swing
-    Right_Motor.run_angle(-1000,450)
+    Right_Motor.reset_angle(0)
+    Right_Motor.run_target(1000,-235)
     #reset the motors and the d variable
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
     #move forward to knock the swing
-    while d < 1300:
+    while d < 650:
         Robot.drive(1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
@@ -141,7 +147,7 @@ def lift_medium_motor2():
 def lift_medium_motor():
     global run
     while run:
-        Med_Motor_2.run(-100)
+        Med_Motor_2.run(-25)
     logging.info("Thread stopped.")
 
 def lift_back_motor():

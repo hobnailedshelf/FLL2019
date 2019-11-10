@@ -25,7 +25,7 @@ def control_runs():
         if Button.UP in brick.buttons():
             brick.display.clear()
             brick.display.text("UP Button - CRANE", (60, 50))
-            Go_To_Crane()
+            Go_To_Crane_2()
         elif Button.RIGHT in brick.buttons():
             brick.display.clear()
             brick.display.text("RIGHT Button - TREE", (60, 50))
@@ -40,7 +40,7 @@ def control_runs():
             Go_To_Swing()
         elif Button.CENTER in brick.buttons():
             brick.display.clear()
-            brick.display.text("LEFT+ Button - SWING/SAFETY", (60, 50))
+            brick.display.text("CENTER + Button - STACK", (60, 50))
             move_stack()
             
         

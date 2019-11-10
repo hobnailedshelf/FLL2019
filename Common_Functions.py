@@ -22,7 +22,7 @@ def line_follower (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,T
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)  
     logging.info("Travelling on black line.")
-    speed=30
+    speed=10
     Current_Distance = 0.0
     #logging.info(str(Current_Distance))
     Light_Reflection = None
