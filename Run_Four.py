@@ -41,7 +41,8 @@ def Safety_Factor():
 
     #START MISSION TO DROP INNOVATION ACRCHITECTURE AND RED BLOCK IN RED CIRCLE
     #Go to the red circle
-    line_follower(200,-1,"r",1,"d",1250,"X","X")
+    Left_Motor.set_dc_settings(55,0)
+    line_follower(350,-1,"r",1,"d",1250,"X","X")
     #lift the back motor to release the red and the blue blocks
     run_back = True # This variable is for the thread that will hold the back motor up
     t_back = Thread(target=lift_back_motor) # set the thread so that when we lift the back motor it keep it up and doesn't fall down due to wait
@@ -53,15 +54,18 @@ def Safety_Factor():
     #END MISSION TO DROP INNOVATION ACRCHITECTURE AND RED BLOCK IN RED CIRCLE
 
     #START MISSION TO GO TO SAFETY FACTOR
-    line_follower(100,-1,"r",1,"d",100,"X","X")
+    line_follower(50,-1,"r",1,"d",100,"X","X")
     #follow line slowly till the left sensor hits white line. This is the intersection of the two lines on the board
-    #go_straight(100,-1,"r",1,"l",50,"l","w")
-    line_follower(50,-1,"r",1,"l",50,"l","w")
+    #go_straight(75,-1,"r",1,"l",10,"l","b")
+    
+    line_follower(40,-1,"r",1,"l",50,"l","w")
+    Left_Motor.set_dc_settings(100,0)
+
     #turn towards *North*
     Right_Motor.reset_angle(0)
     wait(100)
     #TURN NORTH
-    Right_Motor.run_target(1000,220) #150 if we don't follow line
+    Right_Motor.run_target(1000,200) #150 if we don't follow line
 
     #reset the motors and set d variable so that we can travel using robot.drive this is faster than the common function
     d = 0 
