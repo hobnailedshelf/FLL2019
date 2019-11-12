@@ -37,7 +37,7 @@ def control_runs():
         elif Button.LEFT in brick.buttons():
             brick.display.clear()
             brick.display.text("LEFT+ Button - SWING/SAFETY", (60, 50))
-            Go_To_Swing()
+            Safety_Factor()
         elif Button.CENTER in brick.buttons():
             brick.display.clear()
             brick.display.text("CENTER + Button - STACK", (60, 50))
@@ -46,6 +46,9 @@ def control_runs():
         
 
 control_runs()
+
+#Go_To_Bridge()
+
 
 
 

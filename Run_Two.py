@@ -59,7 +59,6 @@ def Go_To_Tree_2():
     go_straight(150,1,"l",-1,"l",25,"l","b")
     Robot.stop(0)
 
-    #Moving it back to fix angle a little bit ****NOT TESTED WELL****
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)

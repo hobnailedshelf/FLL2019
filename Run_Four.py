@@ -12,19 +12,18 @@ def drop_blocks():
 
     Med_Motor_1.run_time(-50,2500)
 
-def Go_To_Swing():
-    logging.info("Mission x - Going to Swing.")
+def Safety_Factor():
+    logging.info("Run 4 - Going to Saftery Factor.")
     
     #define and set run variable for the thread control
     global run
+    global run_back
     run = True
-    t = Thread(target=lift_medium_motor)
-    
+    t = Thread(target=lift_medium_motor) 
     #Start the thread so that the attachment can go up and stay there    
     t.start()
     #lift the back motor up
-    #star thread to keep the back motor up
-    global run_back
+
     Right_Motor.reset_angle(0)
   
     #turn North towards the black line
@@ -40,30 +39,37 @@ def Go_To_Swing():
         Robot.drive(50,0)
         Condition_Reflection = Right_Color_Sensor.reflection()
 
+    #START MISSION TO DROP INNOVATION ACRCHITECTURE AND RED BLOCK IN RED CIRCLE
     #Go to the red circle
-    line_follower(2000,-1,"r",1,"d",1250,"X","X")
+    line_follower(200,-1,"r",1,"d",1250,"X","X")
     #lift the back motor to release the red and the blue blocks
-    run_back = True # This variable is for the thread
+    run_back = True # This variable is for the thread that will hold the back motor up
     t_back = Thread(target=lift_back_motor) # set the thread so that when we lift the back motor it keep it up and doesn't fall down due to wait
     Med_Motor_1.run_time(-200,650) #lift back motor up
     t_back.start() # start the thread so that the back motor stays up
     #go forward to the turn
     wait(200)
-    line_follower(200,-1,"r",1,"d",100,"X","X")
+
+    #END MISSION TO DROP INNOVATION ACRCHITECTURE AND RED BLOCK IN RED CIRCLE
+
+    #START MISSION TO GO TO SAFETY FACTOR
+    line_follower(100,-1,"r",1,"d",100,"X","X")
     #follow line slowly till the left sensor hits white line. This is the intersection of the two lines on the board
-    go_straight(100,-1,"r",1,"l",50,"l","w")
-    #line_follower(40,-1,"r",1,"l",50,"l","w")
+    #go_straight(100,-1,"r",1,"l",50,"l","w")
+    line_follower(50,-1,"r",1,"l",50,"l","w")
     #turn towards *North*
     Right_Motor.reset_angle(0)
-    Right_Motor.run_target(1000,150)
+    wait(100)
+    #TURN NORTH
+    Right_Motor.run_target(1000,220) #150 if we don't follow line
 
     #reset the motors and set d variable so that we can travel using robot.drive this is faster than the common function
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-
-    while d < 600:
-        Robot.drive(1000,0)
+    # travel to the house
+    while d < 520: #600 of we don't follow line
+        Robot.drive(750,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
@@ -72,30 +78,20 @@ def Go_To_Swing():
     #For some reason this only works if we reset the motors
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-    #**** THIS ANGLE IS FLAKY TEST MORE***********
-    Right_Motor.run_angle(-1000,80)
-    #set the run variable as false so that the attachment can come down
+    #Straighten to be at right angle to the house
+    Right_Motor.run_angle(-500,60) #80 if we don't follow line
+    #set the run variable as false so that the attachment can come down. This will end the thread
     run = False
     #move the attachment down
     Med_Motor_2.run_time(100,2000)
-    run = True
-    t2 = Thread(target=down_medium_motor)
-    t2.start
-    #move forward for 2 seconds so that the robot goes and moves the blue stilts
+    #move forward for 1.5 seconds so that the robot goes and moves the blue stilts down
     Robot.drive_time(1000,0,1500)
-    #Run the left motor so that the attachment completely goes in
-    #Left_Motor.run_angle(50,100)
-    run = False
     
     #pull back for 300 degrees so that the attachment comes loose
     go_straight(500,1,"r",-1,"d",300,"l","w")
-    
+    #COMPLETED THE  SAFETY FACTOR MISSION
 
-    
-    #set the run variable as true so that we can lift the motor and the partial attachment up
-    run = True
-    #start the thread so that the attachment can go up
-    t.start()
+    #START SWING MISSION
     #Turn towards the swing
     Right_Motor.reset_angle(0)
     Right_Motor.run_target(1000,-235)
@@ -116,10 +112,8 @@ def Go_To_Swing():
     Right_Motor.reset_angle(0)
 
 
-
-
     #travel back towards beige circle
-    while d < 1200:
+    while d < 1100:
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
@@ -130,33 +124,28 @@ def Go_To_Swing():
     Right_Motor.reset_angle(0)
 
     #Turn to center in the beige circle
-    Left_Motor.run_angle(1000,180)
+    Left_Motor.run_angle(1000,110)
    
     #go north a bit to make sure beige block falls in the circle!
-    Robot.drive_time(-1000,0,500)
+    Robot.drive_time(-200,0,500)
 
     run_back = False
     #drop the block
     Med_Motor_1.run_time(100,2700)
 
-    Robot.drive_time(1000,0,500)
-
-    #Left_Motor.run_angle(1000,-1000)
-    t3 = Thread(target=lift_medium_motor2)
     
-
-    #Start the thread so that the attachment can go up and stay there    
-    t3.start()
     Do_Elevator()
-    #Go_To_Bridge()
+    Go_To_Bridge()
 
 def lift_medium_motor2():
     Med_Motor_1.run_angle(-200,180)
 
 def lift_medium_motor():
     global run
+    run = True
+    logging.info("here")
     while run:
-        Med_Motor_2.run(-25)
+        Med_Motor_2.run(-50)
     logging.info("Thread stopped.")
 
 def lift_back_motor():
@@ -172,12 +161,19 @@ def down_medium_motor():
     logging.info("Thread stopped.")
 
 def Do_Elevator():
+    logging.info("going to elevator")
+    Robot.drive_time(1000,0,500)
+    Med_Motor_2.run_time(-1000,500)
+    #Left_Motor.run_angle(1000,-1000)
+    t3 = Thread(target=lift_medium_motor2)
+    #Start the thread so that the attachment can go up and stay there    
+    t3.start()
+
     #reset the motors and the d varible
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0) 
 
-    #turn about 90 degrees to face elevator
     Left_Motor.run_angle(1000,250)
     Right_Motor.run_angle(1000,-250)
 
@@ -199,31 +195,44 @@ def Do_Elevator():
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
     
+
+
+
+def Go_To_Bridge(): 
+    #reset the motors and the d varible
+    d = 0 
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0)
+    
     #travel back towards elevator
-    while d < 855:
+    while d < 755:
         Robot.drive(1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
     Robot.stop()
 
-def Go_To_Bridge(): 
+
+
+    #go to black line
     Condition_Reflection = Left_Color_Sensor.reflection()
-    logging.info(str(Condition_Reflection))
-    while Condition_Reflection > 8:
-        Robot.drive(200,0)
-        Condition_Reflection =  Left_Color_Sensor.reflection()
-    while Condition_Reflection > 20:
-        Robot.drive(50,0)
-        Condition_Reflection =  Left_Color_Sensor.reflection()
-    Condition_Reflection =  Right_Color_Sensor.reflection()
-    while Condition_Reflection > 20:
-        Right_Motor.run(50)
-        Condition_Reflection =  Right_Color_Sensor.reflection()
-    Condition_Reflection =  Left_Color_Sensor.reflection()
-    while Condition_Reflection > 20:
-        Left_Motor.run(50)
-        Condition_Reflection =  Left_Color_Sensor.reflection()
-    Right_Motor.reset_angle(0)
+    while Condition_Reflection > 15:
+        Robot.drive(100,0)
+        Condition_Reflection = Left_Color_Sensor.reflection()
+
+
+
+    d = 0
     Left_Motor.reset_angle(0)
-    Right_Motor.run_angle(100,270)
+    Right_Motor.reset_angle(0)
+    while d < 220:
+        Left_Motor.run(100)
+        Right_Motor.run(-100)
+        d = abs(Left_Motor.angle())
+    Condition_Reflection = Left_Color_Sensor.reflection()
+    while Condition_Reflection > 15:
+        Left_Motor.run(100)
+        Right_Motor.run(-100)
+        Condition_Reflection = Left_Color_Sensor.reflection()
+    line_follower(1000,-1,"l",1,"d",1750,"X","X")
+    #line_follower(30,-1,"l",1,"d",1000,"X","X")
