@@ -12,7 +12,8 @@ import logging # this is used for logging
 logging.info("Beginning of the Runs.")
 battery = str(brick.battery.voltage())
 logging.info(battery)
-
+logging.info(" Right Color Sensor " +str(Right_Color_Sensor.reflection()))
+logging.info(" Left Color Sensor " +str(Left_Color_Sensor.reflection()))
 
 def control_runs():
     #Code to manage runs with buttons
@@ -28,8 +29,8 @@ def control_runs():
             Go_To_Crane_2()
         elif Button.RIGHT in brick.buttons():
             brick.display.clear()
-            brick.display.text("RIGHT Button - TREE", (60, 50))
-            Go_To_Tree_2()   
+            brick.display.text("RIGHT Button - STACK", (60, 50))
+            move_stack_tree()   
         elif Button.DOWN in brick.buttons():
             brick.display.clear()
             brick.display.text("DOWN Button - TRAFFIC", (60, 50))

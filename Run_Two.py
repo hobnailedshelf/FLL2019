@@ -53,6 +53,15 @@ def move_stack():
     Robot.drive_time(-1000, 0, 1700)
 
 
+def move_stack_tree():
+    d = 0 
+    Left_Motor.reset_angle(0)
+    Right_Motor.reset_angle(0)
+    go_straight(1000,-1,"l",1,"d",1100,"l","b")
+    Robot.drive_time(-1000, 800, 1000)
+    Robot.drive_time(-1000, 0, 2000)
+
+
 def Go_To_Tree_2():
     logging.info("Starting of the tree mission to smalll branch.")
     # Go to the Black line

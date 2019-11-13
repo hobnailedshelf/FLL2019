@@ -54,7 +54,7 @@ def Safety_Factor():
     #END MISSION TO DROP INNOVATION ACRCHITECTURE AND RED BLOCK IN RED CIRCLE
 
     #START MISSION TO GO TO SAFETY FACTOR
-    line_follower(50,-1,"r",1,"d",100,"X","X")
+    line_follower(40,-1,"r",1,"d",100,"X","X")
     #follow line slowly till the left sensor hits white line. This is the intersection of the two lines on the board
     #go_straight(75,-1,"r",1,"l",10,"l","b")
     
