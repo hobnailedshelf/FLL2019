@@ -43,6 +43,7 @@ def Safety_Factor():
     #Go to the red circle
     Left_Motor.set_dc_settings(55,0)
     line_follower(350,-1,"r",1,"d",1250,"X","X")
+    logging.info("....." + str(Right_Motor.angle()))
     #lift the back motor to release the red and the blue blocks
     run_back = True # This variable is for the thread that will hold the back motor up
     t_back = Thread(target=lift_back_motor) # set the thread so that when we lift the back motor it keep it up and doesn't fall down due to wait

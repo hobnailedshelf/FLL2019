@@ -44,7 +44,7 @@ def Go_To_Crane_2():
     #go to crane
     go_straight(2000,-1,"r",1,"d",350,"l","w")
     go_straight(50,-1,"r",1,"d",100,"l","w")
-    Left_Motor.run_angle(100, 25)
+    Left_Motor.run_angle(110, 40)
     wait(200)
 
     lift_arm()  
@@ -125,8 +125,8 @@ def Go_To_Crane_3():
 
 def lift_arm():
     i=1
-    while i < 6:
-        ang = 60 + i*5 
+    while i < 8:
+        ang = 50 + i*5 
         Med_Motor_2.run_angle(1000,ang)
         Med_Motor_2.run_angle(-1000,ang)
         i = i + 1
