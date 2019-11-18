@@ -58,8 +58,8 @@ def move_stack_tree():
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
     go_straight(1000,-1,"l",1,"d",1200,"l","b")
-    Robot.drive_time(-1000, 825, 760)
-    Robot.drive_time(-1000, 0,2500)
+    Robot.drive_time(-1000, 800, 760)
+    Robot.drive_time(-1000, 0,2700)
 
 
 def Go_To_Tree_2():

@@ -31,7 +31,7 @@ def line_follower (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,T
     integral = 0
     kp = 1.5 #1.5
     ki = .15 #.15
-    kd = .1 #.1
+    kd = .blacklin1 #.1
     last_error = 0
     flag = True
     Robot.drive(speed,0)

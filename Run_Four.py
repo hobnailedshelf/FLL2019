@@ -129,7 +129,7 @@ def Safety_Factor():
     Right_Motor.reset_angle(0)
 
     #Turn to center in the beige circle
-    Left_Motor.run_angle(1000,110)
+    Left_Motor.run_angle(1000,90)
    
     #go north a bit to make sure beige block falls in the circle!
     Robot.drive_time(-200,0,500)
@@ -167,7 +167,7 @@ def down_medium_motor():
 
 def Do_Elevator():
     logging.info("going to elevator")
-    Robot.drive_time(1000,0,500)
+    Robot.drive_time(1000,0,600)
     Med_Motor_2.run_time(-1000,500)
     #Left_Motor.run_angle(1000,-1000)
     t3 = Thread(target=lift_medium_motor2)
@@ -180,7 +180,7 @@ def Do_Elevator():
     Right_Motor.reset_angle(0) 
 
     Left_Motor.run_angle(1000,250)
-    Right_Motor.run_angle(1000,-250)
+    Right_Motor.run_angle(1000,-200)
 
     #reset the motors and the d varible
     d = 0 
@@ -240,4 +240,3 @@ def Go_To_Bridge():
         Right_Motor.run(-100)
         Condition_Reflection = Left_Color_Sensor.reflection()
     line_follower(1000,-1,"l",1,"d",1750,"X","X")
-    #line_follower(30,-1,"l",1,"d",1000,"X","X")

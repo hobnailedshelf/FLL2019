@@ -65,7 +65,6 @@ def Go_To_Crane_2():
     #Left_Motor.run_angle(-1000,400)
    
 
-
 def Go_To_Crane_3():
     t = Thread(target=reset_arm)
     
