@@ -25,6 +25,7 @@ def Safety_Factor():
     Right_Motor.reset_angle(0)
   
     #turn North towards the black line
+    #run_target - Run the motor at a constant speed towards a given target angle.
     Right_Motor.run_target(300,165)
     logging.info("completed run taret")
     #go to black line

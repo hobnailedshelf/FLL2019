@@ -6,6 +6,7 @@ import logging # this is used for logging
 
 
 def Go_To_Crane():
+    #define thread so that we can move the armm down in parallel down to the attachment
     t = Thread(target=reset_arm)
     
     #Start the thread so that the attachment can go up and stay there    
@@ -53,7 +54,6 @@ def Go_To_Crane():
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-    #Left_Motor.run_angle(-1000,160)
     
     #go back to home area
     Robot.drive_time(-1000,650,2500)
@@ -61,13 +61,13 @@ def Go_To_Crane():
     Robot.stop(0)
     Left_Motor.reset_angle(0)
     Left_Motor.run_angle(-1000,800)
-    #Left_Motor.reset_angle(0)
-    #Left_Motor.run_angle(-1000,400)
+
 
 
 
 def lift_arm():
     i=1
+    #We try the arm at increasing degrees. 55 degrees, 60 degrees etc. till 85 degrees. this way we reduce the number of times it fails. 
     while i < 8:
         ang = 50 + i*5 
         Med_Motor_2.run_angle(1000,ang)
@@ -76,4 +76,7 @@ def lift_arm():
 
 
 def reset_arm():
+    #arm is moved down. it goes down until it hits the attachment. 40 is the maximum torque
+    #run_until_stalled(speed, stop_type=Stop.COAST, duty_limit=default)
+    #stop_type (Stop) – Whether to coast, brake, or hold after coming to a standstill (Default: Stop.COAST).
     Med_Motor_2.run_until_stalled(-50,0,40)

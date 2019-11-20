@@ -38,14 +38,14 @@ def line_follower (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,T
 
     while flag:
 
-            
+        #accelerate to the maximum speed 
         if speed < m_speed:    
             speed = speed + 2
         if WhichSensor == "l":
             Light_Reflection = Left_Color_Sensor.reflection()
         else:
             Light_Reflection = Right_Color_Sensor.reflection()
-
+    
         error = Target_Reflection - Light_Reflection
         p_gain = error*kp
         integral = integral + error

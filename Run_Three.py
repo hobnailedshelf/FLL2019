@@ -12,7 +12,6 @@ def lift_traffic():
     line_follower(500,1,"l",1,"d",700,"l","w")
     #old attchment code end
    
-    #go_straight(700,-1,"r",1,"d",1500,"l","w")
 
     Left_Motor.run_time(1000, 1000)
     wait(300)
