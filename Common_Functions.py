@@ -5,7 +5,6 @@ from pybricks.tools import wait
 from pybricks.robotics import DriveBase
 import logging
 from Initialize import *
-#from Initialize import Left_Color_Sensor
 
 
 
@@ -29,9 +28,10 @@ def line_follower (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,T
     Condition_Reflection = None
     last_error = 0
     integral = 0
+    #ki, kp, and kd are constants that are dependent on robot. we selected these after testing the robot.
     kp = 1.5 #1.5
     ki = .15 #.15
-    kd = .blacklin1 #.1
+    kd = .1 #.1
     last_error = 0
     flag = True
     Robot.drive(speed,0)
@@ -45,8 +45,6 @@ def line_follower (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,T
             Light_Reflection = Left_Color_Sensor.reflection()
         else:
             Light_Reflection = Right_Color_Sensor.reflection()
-
-          
 
         error = Target_Reflection - Light_Reflection
         p_gain = error*kp
@@ -63,7 +61,6 @@ def line_follower (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,T
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         Current_Distance = (l+r)/2
-        #logging.info(str(Current_Distance) + " | " + str(Light_Reflection) + " | " + str(p_gain) + " | " + str(i_gain) + " | " + str(d_gain))
 
         if Condition_Sensor == "l":
             Condition_Reflection = Left_Color_Sensor.reflection()
@@ -137,7 +134,6 @@ def go_straight (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Tar
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         Current_Distance = (l+r)/2
-        #logging.info(str(Current_Distance) + " | " + str(Light_Reflection) + " | " + str(p_gain) + " | " + str(i_gain) + " | " + str(d_gain))
 
         if Condition_Sensor == "l":
             Condition_Reflection = Left_Color_Sensor.reflection()

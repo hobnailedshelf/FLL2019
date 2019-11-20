@@ -4,8 +4,6 @@ from Common_Functions import * # import all the main functions
 from threading import Thread
 import logging # this is used for logging
 
-
-
 def drop_blocks():
     logging.info("lifting blocks up")
     Med_Motor_1.run_time(50,2500)
@@ -239,4 +237,4 @@ def Go_To_Bridge():
         Left_Motor.run(100)
         Right_Motor.run(-100)
         Condition_Reflection = Left_Color_Sensor.reflection()
-    line_follower(1000,-1,"l",1,"d",1750,"X","X")
+    line_follower(1000,-1,"l",1,"d",1650,"X","X")
