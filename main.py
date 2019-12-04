@@ -8,25 +8,28 @@ from Run_Two import *
 from Run_Three import *
 from Run_Four import *
 import logging # this is used for logging
-#joe is here Dont mind me
+
 logging.info("Beginning of the Runs.")
 battery = str(brick.battery.voltage())
 logging.info(battery)
 logging.info(" Right Color Sensor " +str(Right_Color_Sensor.reflection()))
 logging.info(" Left Color Sensor " +str(Left_Color_Sensor.reflection()))
 
+
 def control_runs():
     #Code to manage runs with buttons
     brick.display.clear()
     brick.display.text("Ready to Run", (60, 50))
     voltage = str(brick.battery.voltage())
+    #show the voltage on the display
     brick.display.text("Voltage = " + voltage)
+    #change color to orange to show the program started
     brick.light(Color.ORANGE)
     while True:
         if Button.UP in brick.buttons():
             brick.display.clear()
             brick.display.text("UP Button - CRANE", (60, 50))
-            Go_To_Crane()
+            Go_To_Crane3()
         elif Button.RIGHT in brick.buttons():
             brick.display.clear()
             brick.display.text("RIGHT Button - STACK", (60, 50))
@@ -47,6 +50,4 @@ def control_runs():
         
 
 control_runs()
-
-
 

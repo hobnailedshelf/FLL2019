@@ -18,7 +18,7 @@ Robot = None
 Max_Speed = None
 Target_Reflection = None
 def init_robot():
-    #####Initialization###################################################################################################################
+    #####Initialization###########################################################################
     logging.info("####################################")
 
     logging.info("Initializing the robot.")
@@ -42,13 +42,13 @@ def init_robot():
     Right_Motor = Motor(Port.D)
     Med_Motor_1 = Motor(Port.A)
     Med_Motor_2 = Motor(Port.B)
+    #Left_Motor.set_run_settings(1000, 100)
+    #Right_Motor.set_run_settings(1000, 100)
 
     #Initialize Sensors
     Left_Color_Sensor = ColorSensor(Port.S2)
     Right_Color_Sensor = ColorSensor(Port.S3)
-    #Back_Color_Sensor = ColorSensor(Port.S4)
-    #Gyro = ColorSensor(Port.S1)
-    #Touch_Sensor = ColorSensor(Port.S4)
+
 
     #Set Wheel Diameters and Axle Length
     WheelDiameter = 55 #42 # diameter of the wheel in mm
@@ -56,13 +56,6 @@ def init_robot():
 
     #####The drivebase function helps to drive the robot. This is initialization of the drivebase 
     Robot = DriveBase(Left_Motor, Right_Motor, WheelDiameter, AxleLength)
-    #####we can collect important information in a log file. this information will help us figure out things like speed, angle, etc. at various points of the run
-    #####name of the log file is log.txt
-    #####this file is stored on the ev3 brick, you have to download the file to view it
-
-
-    #reset the gyro angle to zero at the beginning of the program
-    #gyro.reset_angle(0)
 
     Max_Speed = 70
     Robot.stop(0)
@@ -71,4 +64,4 @@ def init_robot():
 
     logging.info("Initializing complete.")
     logging.info("####################################")
-    ##### initialization complete ###################################################################################################################
+    ##### initialization complete ##############################################################################

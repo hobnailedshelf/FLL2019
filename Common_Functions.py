@@ -46,6 +46,7 @@ def line_follower (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,T
         else:
             Light_Reflection = Right_Color_Sensor.reflection()
     
+        #Calculate PID
         error = Target_Reflection - Light_Reflection
         p_gain = error*kp
         integral = integral + error
@@ -54,20 +55,22 @@ def line_follower (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,T
         d_gain = Derivative*kd
 
         PID = p_gain + i_gain + d_gain
+        #drive robot with the PID Calculation. Multiply by direction to calculate which way to turn.
         Robot.drive(speed*Forward_BackWard,PID*Direction)
 
         last_error = error
         wait(1)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
+        #calculate distance
         Current_Distance = (l+r)/2
-
+        #check if the robot has to stop for light reflection or distance
         if Condition_Sensor == "l":
             Condition_Reflection = Left_Color_Sensor.reflection()
         else:
             Condition_Reflection = Right_Color_Sensor.reflection()
 
-
+        #if it is distance see if it has reached the distance
         if Condition == "d":
             if Current_Distance >= Target_Condition:
                 flag = False
@@ -100,6 +103,7 @@ def go_straight (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Tar
     Condition_Reflection = None
     last_error = 0
     integral = 0
+    #ki, kp, and kd are constants that are dependent on robot. we selected these after testing the robot.
     kp = .8 #1.5
     ki = .15 #.15
     kd = .1 #.1
@@ -111,7 +115,7 @@ def go_straight (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Tar
 
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
-
+        #accelerate
         if speed < m_speed:    
             speed = speed + 5 #originally 2
         if WhichSensor == "l":
@@ -119,6 +123,7 @@ def go_straight (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Tar
         else:
             Light_Reflection = Right_Color_Sensor.reflection()
 
+        #calculate PID
         error = l - r 
         p_gain = error*kp
         integral = integral + error
@@ -134,12 +139,12 @@ def go_straight (m_speed, Direction, WhichSensor, Forward_BackWard,Condition,Tar
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         Current_Distance = (l+r)/2
-
+        #check if it should stop at sensor or distance
         if Condition_Sensor == "l":
             Condition_Reflection = Left_Color_Sensor.reflection()
         else:
             Condition_Reflection = Right_Color_Sensor.reflection()
-
+        # if it stops at distance check if it has reached the target distance
         if Condition == "d":
             if Target_Condition - Current_Distance < 50:
                 speed = 30
