@@ -15,21 +15,21 @@ def Safety_Factor():
     #Start the thread so that the attachment can go up and stay there    
     #t.start()
 
-    #Right_Motor.run_angle(-1000,180)
-    #Right_Motor.run_angle(1000,180)
+    Right_Motor.run_angle(-1000,180)
+    Right_Motor.run_angle(1000,180)
     #lift the back motor up
 
     Right_Motor.reset_angle(0)
   
     #turn North towards the black line
     #run_target - Run the motor at a constant speed towards a given target angle.
-    #Right_Motor.run_target(300,165)
-    #logging.info("completed run target")
+    Right_Motor.run_target(300,165)
+    logging.info("completed run target")
     #go to black line
-    #Condition_Reflection = Right_Color_Sensor.reflection()
-    #while Condition_Reflection > 15:
-        #Robot.drive(200,0)
-        #Condition_Reflection = Right_Color_Sensor.reflection()
+    Condition_Reflection = Right_Color_Sensor.reflection()
+    while Condition_Reflection > 15:
+        Robot.drive(200,0)
+        Condition_Reflection = Right_Color_Sensor.reflection()
     #move forward to get to the half black and half white
     while Condition_Reflection < 35:
         Robot.drive(50,0)
