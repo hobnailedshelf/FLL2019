@@ -29,7 +29,7 @@ def control_runs():
         if Button.UP in brick.buttons():
             brick.display.clear()
             brick.display.text("UP Button - CRANE", (60, 50))
-            Go_To_Crane3()
+            Go_To_Crane()
         elif Button.RIGHT in brick.buttons():
             brick.display.clear()
             brick.display.text("RIGHT Button - STACK", (60, 50))

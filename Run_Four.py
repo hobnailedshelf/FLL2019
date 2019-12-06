@@ -15,15 +15,15 @@ def Safety_Factor():
     #Start the thread so that the attachment can go up and stay there    
     #t.start()
 
-    Right_Motor.run_angle(-1000,180)
-    Right_Motor.run_angle(1000,180)
+    Right_Motor.run_angle(-1000,100)
+    Right_Motor.run_angle(1000,265)
     #lift the back motor up
 
     Right_Motor.reset_angle(0)
   
     #turn North towards the black line
     #run_target - Run the motor at a constant speed towards a given target angle.
-    Right_Motor.run_target(300,165)
+    #Right_Motor.run_target(300,165)
     logging.info("completed run target")
     #go to black line
     Condition_Reflection = Right_Color_Sensor.reflection()
@@ -38,7 +38,7 @@ def Safety_Factor():
     #START MISSION TO DROP INNOVATION ACRCHITECTURE AND RED BLOCK IN RED CIRCLE
     #Go to the red circle
     Left_Motor.set_dc_settings(55,0)
-    line_follower(350,-1,"r",1,"d",1250,"X","X")
+    line_follower(350,-1,"r",1,"d",1175,"X","X")
     #lift the back motor to release the red and the blue blocks
     run_back = True # This variable is for the thread that will hold the back motor up
     t_back = Thread(target=lift_back_motor) # set the thread so that when we lift the back motor it keep it up and doesn't fall down due to wait
@@ -50,7 +50,7 @@ def Safety_Factor():
     #END MISSION TO DROP INNOVATION ACRCHITECTURE AND RED BLOCK IN RED CIRCLE
 
     #START MISSION TO GO TO SAFETY FACTOR
-    line_follower(40,-1,"r",1,"d",100,"X","X")
+    #line_follower(40,-1,"r",1,"d",150,"X","X")
     #follow line slowly till the left sensor hits white line. This is the intersection of the two lines on the board
     #go_straight(75,-1,"r",1,"l",10,"l","b")
     
@@ -98,7 +98,7 @@ def Safety_Factor():
     #START SWING MISSION
     #Turn towards the swing
     Right_Motor.reset_angle(0)
-    Right_Motor.run_target(250,-200)
+    Right_Motor.run_angle(250,-200)
     #reset the motors and the d variable
     d = 0 
     Left_Motor.reset_angle(0)
@@ -117,8 +117,8 @@ def Safety_Factor():
     wait(250)
 
     #travel back towards beige circle
-    while d < 1100:
-        Robot.drive(-250,7)
+    while d < 1150:
+        Robot.drive(-250,6)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
@@ -131,7 +131,7 @@ def Safety_Factor():
     #Left_Motor.run_angle(800,80)
    
     #go north a bit to make sure beige block falls in the circle!
-    Robot.drive_time(-120,0,400)
+    #Robot.drive_time(-120,0,400)
 
     run_back = False
     #drop the block
@@ -211,15 +211,14 @@ def Do_Elevator():
 
     Left_Motor.run_angle(1000,250)
     Right_Motor.run_angle(1000,-335)
-    #line_follower(50,-1,"l",-1,"d",220,"X","X")
-    #Left_Motor.run_angle(100,120)
+
     #reset the motors and the d varible
     d = 0 
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
 
     #travel back towards elevator
-    while d < 530:
+    while d < 480:
         Robot.drive(-1000,0)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
@@ -241,37 +240,47 @@ def Go_To_Bridge():
     Right_Motor.reset_angle(0)
     
     #travel back from elevator
-    while d < 950:
-        Robot.drive(800,0)
+    while d < 900:
+        Robot.drive(800,5)
         l = abs(Left_Motor.angle())
         r = abs(Right_Motor.angle())
         d = (l+r)/2
     Robot.stop()
 
     #go to black line
-    Condition_Reflection = Right_Color_Sensor.reflection()
+    Condition_Reflection = Left_Color_Sensor.reflection()
     while Condition_Reflection > 15:
         Robot.drive(100,0)
+        Condition_Reflection = Left_Color_Sensor.reflection()
+    Robot.stop(0)
+
+    Condition_Reflection = Right_Color_Sensor.reflection()
+    while Condition_Reflection < 50:
+        Right_Motor.run(100)
         Condition_Reflection = Right_Color_Sensor.reflection()
     Robot.stop(0)
     #go to white line
-    Condition_Reflection = Right_Color_Sensor.reflection()
-    while Condition_Reflection < 50:
+    Condition_Reflection = Left_Color_Sensor.reflection()
+    while Condition_Reflection < 40:
         Robot.drive(100,0)
-        Condition_Reflection = Right_Color_Sensor.reflection()
+        Condition_Reflection = Left_Color_Sensor.reflection()
     Robot.stop(0)
     d = 0
     Left_Motor.reset_angle(0)
     Right_Motor.reset_angle(0)
-    go_straight(150,-1,"r",1,"d",50,"r","b")
+    #go_straight(150,-1,"r",1,"d",20,"r","b")
     while d < 240:
         Left_Motor.run(100)
         Right_Motor.run(-100)
         d = abs(Left_Motor.angle())
     Condition_Reflection = Left_Color_Sensor.reflection()
+    while Condition_Reflection < 55:
+        Left_Motor.run(100)
+        Right_Motor.run(-100)
+        Condition_Reflection = Left_Color_Sensor.reflection()
     while Condition_Reflection > 15:
         Left_Motor.run(100)
         Right_Motor.run(-100)
         Condition_Reflection = Left_Color_Sensor.reflection()
     line_follower(2000,-1,"l",1,"d",700,"X","X") #1550
-    Robot.drive_time(750,0,1500)
+    Robot.drive_time(750,0,1100)
